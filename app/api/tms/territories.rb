@@ -5,7 +5,7 @@ module Tms
     get 'zips/:zip' do
       zip = params[:zip].to_i
       single_zip =Postcode.where(zip: zip).first
-      {name: params[:zip], vertexes: single_zip.vertexes, isOriginal: 'true'}
+      single_zip.zip_body
     end
 
 
