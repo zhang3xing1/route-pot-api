@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151011113910) do
+ActiveRecord::Schema.define(version: 20151011103538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
-  enable_extension "hstore"
 
   create_table "parsed_gps_traces", force: :cascade do |t|
     t.date     "delivery_date"
@@ -36,15 +35,6 @@ ActiveRecord::Schema.define(version: 20151011113910) do
 
   add_index "parsed_gps_traces", ["seq_id"], name: "index_parsed_gps_traces_on_seq_id", using: :btree
   add_index "parsed_gps_traces", ["zipcode"], name: "index_parsed_gps_traces_on_zipcode", using: :btree
-
-  create_table "postcodes", force: :cascade do |t|
-    t.string   "zip"
-    t.geometry "polygon",    limit: {:srid=>0, :type=>"geometry"}
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-  end
-
-  add_index "postcodes", ["zip"], name: "index_postcodes_on_zip", using: :btree
 
   create_table "territories", force: :cascade do |t|
     t.string   "name"
