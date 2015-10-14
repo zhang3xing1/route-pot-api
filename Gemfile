@@ -8,7 +8,7 @@ gem 'httparty'
 gem 'puma'
 
 
-gem 'rgeo'
+gem 'rgeo', require: false
 gem 'activerecord-postgis-adapter'
 
 ######
@@ -57,4 +57,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
