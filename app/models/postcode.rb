@@ -5,9 +5,7 @@ class Postcode < ActiveRecord::Base
   end
 
   def centroid
-    res = Postcode.connection.execute %Q{SELECT ST_AsText(ST_Centroid('#{self.polygon.to_s}'));}
-    #"POINT(127.170013617607 37.4620578958111)"
-    format_point(res.getvalue(0,0))
+    format_point(Postcode.where(zip: self.zip).first.polygon.centroid)
   end
 
   def zip_body
@@ -16,7 +14,7 @@ class Postcode < ActiveRecord::Base
 
   private
   def format_point(point_from_db)
-    lonlat = self.polygon.to_s.match(/\(\((.*)\)\)/).captures.first.split(' ')
+    lonlat = point_from_db.to_s.match(/\((.*)\)/).captures.first.split(' ')
     {longitude: lonlat.first, latitude: lonlat.last}
   end
 

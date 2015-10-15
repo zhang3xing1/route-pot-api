@@ -1,7 +1,9 @@
 class Territory < ActiveRecord::Base
 
   def zip_body
-    Postcode.where(zip:  self.zips['zips'] || []).map { |zip| {name:zip.zip, centroid: zip.centroid, vertexes: zip.vertexes, isOriginal: 'true'} }
+    Postcode.where(zip:  self.zips['zips'] || []).map do |zip|
+      {name:zip.zip, centroid:  zip.centroid, vertexes: zip.vertexes, isOriginal: 'true'}
+    end
   end
 
 end
